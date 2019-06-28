@@ -35,12 +35,9 @@ export class AnnotationsCtrl extends PanelCtrl {
         this.$http = $http;
 
         // get influx datasources
-        this.backendSrv.get('/api/datasources')
-            .then((result) => {
-                this.availableDatasources = _.filter(result, {"type": "influxdb"});
-                this.selectedDatasource = this.availableDatasources[1];
-            });
-
+        this.availableDatasources = _.filter(window.grafanaBootData.settings.datasources, {"type": "influxdb"});
+        this.selectedDatasource = this.availableDatasources[1];
+        
         this.annotation = annotationDefaults;
         this.editor = editorDefaults;
 
